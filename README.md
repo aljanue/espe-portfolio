@@ -1,73 +1,105 @@
-# React + TypeScript + Vite
+# Espe Moragues — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, modern, and interactive personal portfolio website for **Espe Moragues**, a Creative Art Director based in Valencia. Designed with rich aesthetics, smooth micro-animations, custom interactions, and a clean typography-driven aesthetic.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- 🖱️ **Custom Fluid Cursor**: Interactive mouse follower with custom states.
+- 🎨 **Modern Dark Aesthetics**: Premium dark palette (`#131313`) featuring glassmorphic effects, subtle gradients, and elegant typography.
+- 🔄 **Component Micro-Animations**: Smooth entry animations using React-based transition states.
+- 📱 **Fully Responsive**: Optimized for everything from mobile phones to high-resolution desktop monitors.
+- 📊 **Dynamic Data-Driven Architecture**: Easily modifiable portfolio data layer decoupled from the layout components.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Framework**: [React 19](https://react.dev/)
+- **Build Tool**: [Vite](https://vite.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📂 Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+├── src/
+│   ├── assets/          # Static assets and graphics
+│   ├── components/      # UI components grouped by function
+│   │   ├── layout/      # Global layout (Navbar, Footer)
+│   │   ├── sections/    # Page sections (Hero, Quote, About, Projects, Experience)
+│   │   └── ui/          # Reusable micro-components (Cursor, Badges, Cards)
+│   ├── data/            # Local data models and portfolio content (portfolio.ts)
+│   ├── hooks/           # Custom React hooks (usePortfolio)
+│   ├── services/        # Service layers for data fetching/handling
+│   ├── App.tsx          # Main application component
+│   ├── index.css        # Global styles and Tailwind v4 configuration
+│   └── main.tsx         # React entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
+### Prerequisites
+
+Ensure you have **Node.js** (version 18+ recommended) and **npm** installed.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/aljanue/espe-portfolio.git
+   cd espe-portfolio
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:5173](http://localhost:5173) in your browser to view the application.
+
+### Build and Deployment
+
+To generate a optimized production build in the `dist` folder:
+```bash
+npm run build
+```
+
+To preview the production build locally:
+```bash
+npm run preview
+```
+
+---
+
+## 📝 Customizing Portfolio Data
+
+All the copy, projects, experiences, and social links are centralized in a single configuration file. To update the content of the portfolio, modify the object inside:
+
+📍 `src/data/portfolio.ts`
+
+```typescript
+export const portfolioData: PortfolioData = {
+  personalInfo: {
+    name: "Espe Moragues",
+    subheadline: "Creative Art Director based in Valencia...",
+    // ...
   },
-])
+  projects: [
+    // Add or modify projects here
+  ],
+  experiences: [
+    // Add or modify career experiences here
+  ]
+};
 ```

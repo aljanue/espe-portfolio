@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #c6c6c6;
+  --color-surface: #131313;
+  --color-background: #131313;
+  --color-on-background: #e2e2e2;
+  --color-on-surface: #e2e2e2;
+  --color-on-surface-variant: #cfc4c5;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1b1b1b;
+  --color-surface-container: #1f1f1f;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353535;
+  --color-surface-bright: #393939;
+  --color-surface-dim: #131313;
+  --color-outline: #988e90;
+  --color-outline-variant: #4c4546;
+
+  --font-headline-lg: "Syne", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-headline-md: "Syne", sans-serif;
+  --font-headline-lg-mobile: "Syne", sans-serif;
+  --font-display-xl: "Syne", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-label-caps: "Inter", sans-serif;
+
+  --spacing-gutter: 32px;
+  --spacing-edge-margin-mobile: 24px;
+  --spacing-container-max: 1440px;
+  --spacing-edge-margin-desktop: 80px;
+  --spacing-section-padding: 160px;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-fast {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rotate {
+  animation: rotate-slow 15s linear infinite;
+}
+
+.animate-rotate-very-slow {
+  animation: rotate-slow 30s linear infinite;
+}
+
+.footer-asterisk:hover {
+  animation: rotate-fast 0.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #00f2ff, #7000ff);
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient-asterisk {
+  background: linear-gradient(135deg, #00f2ff, #7000ff);
+}
+
+.glass-nav {
+  backdrop-filter: blur(20px);
+  background: rgba(19, 19, 19, 0.7);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.2s ease, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor-hover #custom-cursor {
+  transform: scale(3);
+  background-color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #131313;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #353535;
+}
+
+.project-card-overlay {
+  background: linear-gradient(135deg, rgba(0, 100, 110, 0.75), rgba(50, 0, 110, 0.75));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .project-card-overlay {
+  opacity: 1;
+}
+
+.interactive-element {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+.interactive-element:hover {
+  transform: scale(0.95);
+}

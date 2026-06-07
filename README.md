@@ -10,8 +10,9 @@ A premium, modern, and interactive personal portfolio website for **Espe Morague
 - 🎨 **Modern Dark Aesthetics**: Premium dark palette (`#131313`) featuring glassmorphic effects, subtle gradients, and elegant typography.
 - 🔄 **Component Micro-Animations**: Smooth entry animations using React-based transition states.
 - 📱 **Fully Responsive**: Optimized for everything from mobile phones to high-resolution desktop monitors.
-- 📊 **Dynamic Data-Driven Architecture**: Easily modifiable portfolio data layer decoupled from the layout components.
-- 🌐 **Multi-language (i18n)**: Full support for Spanish (`es`) and English (`en`), each with their own data block.
+- 📊 **Contentful CMS Integration**: Connects to Contentful via a decoupled service layer to fetch content in real-time. Includes an intelligent 24-hour `localStorage` cache to minimize API calls.
+- 🚦 **Native Navigation History**: Custom `window.history` integration (`HistoryService`) so browser Back/Forward buttons smoothly navigate modals and languages without reloading.
+- 🌐 **Multi-language (i18n)**: Full support for Spanish (`es`) and English (`en`), each with their own data block and automated CMS fallback routing.
 
 ---
 
@@ -71,6 +72,22 @@ Ensure you have **Node.js** (version 18+ recommended) and **npm** installed.
    npm run dev
    ```
    Open [http://localhost:5173](http://localhost:5173) in your browser to view the application.
+
+### Environment Variables (CMS)
+
+To connect the application to **Contentful**, create a `.env` file in the root directory and add your credentials:
+
+```env
+VITE_CONTENTFUL_SPACE_ID="your-space-id"
+VITE_CONTENTFUL_ACCESS_TOKEN="your-delivery-api-token"
+VITE_CONTENTFUL_ENVIRONMENT="master"
+```
+
+> **Note:** If these variables are not provided, the application will automatically fall back to using the local mock data inside `src/data/portfolio.ts` to prevent crashing.
+
+### Schema Documentation
+
+For a complete guide on how to structure the data in Contentful, please refer to the [CMS_INTEGRATION.md](./CMS_INTEGRATION.md) file.
 
 ### Build and Deployment
 

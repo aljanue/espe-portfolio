@@ -12,7 +12,7 @@ import { Experience } from "./components/sections/Experience";
 import { Footer } from "./components/layout/Footer";
 import { BackgroundAsterisk } from "./components/ui/BackgroundAsterisk";
 import { ProjectDetail } from "./components/project-detail/ProjectDetail";
-import { LanguageSwitcher } from "./components/ui/LanguageSwitcher";
+
 
 export default function App() {
   const { t } = useTranslation();
@@ -49,7 +49,13 @@ export default function App() {
     );
   }
 
-  const { personalInfo, projects, experiences, socials } = data;
+  const {
+    personalInfo,
+    projects = [],
+    experiences = [],
+    socials = [],
+  } = data;
+
 
   return (
     <>
@@ -57,15 +63,22 @@ export default function App() {
       <CustomCursor />
 
       {/* Global Navigation */}
-      <Navbar name={personalInfo.name} />
+      <Navbar 
+        name={personalInfo.name} 
+        jobTitle={personalInfo.jobTitle}
+        useEnglish={personalInfo.useEnglish}
+      />
 
       {/* Page Sections */}
       <main className="w-full">
         <Hero 
           name={personalInfo.name} 
-          subheadline={personalInfo.subheadline} 
+          subheadline={personalInfo.subheadline ?? ''} 
+          badgeText={personalInfo.badgeText}
         />
-        <Quote />
+        {data.quote && (
+          <Quote text={data.quote.text} author={data.quote.author} />
+        )}
         <About 
           avatarUrl={personalInfo.avatarUrl} 
           bioParagraphs={personalInfo.bioParagraphs} 

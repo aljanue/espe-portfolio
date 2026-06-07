@@ -11,6 +11,7 @@ A premium, modern, and interactive personal portfolio website for **Espe Morague
 - 🔄 **Component Micro-Animations**: Smooth entry animations using React-based transition states.
 - 📱 **Fully Responsive**: Optimized for everything from mobile phones to high-resolution desktop monitors.
 - 📊 **Dynamic Data-Driven Architecture**: Easily modifiable portfolio data layer decoupled from the layout components.
+- 🌐 **Multi-language (i18n)**: Full support for Spanish (`es`) and English (`en`), each with their own data block.
 
 ---
 
@@ -28,17 +29,20 @@ A premium, modern, and interactive personal portfolio website for **Espe Morague
 
 ```text
 ├── src/
-│   ├── assets/          # Static assets and graphics
-│   ├── components/      # UI components grouped by function
-│   │   ├── layout/      # Global layout (Navbar, Footer)
-│   │   ├── sections/    # Page sections (Hero, Quote, About, Projects, Experience)
-│   │   └── ui/          # Reusable micro-components (Cursor, Badges, Cards)
-│   ├── data/            # Local data models and portfolio content (portfolio.ts)
-│   ├── hooks/           # Custom React hooks (usePortfolio)
-│   ├── services/        # Service layers for data fetching/handling
-│   ├── App.tsx          # Main application component
-│   ├── index.css        # Global styles and Tailwind v4 configuration
-│   └── main.tsx         # React entry point
+│   ├── assets/                 # Static assets and graphics
+│   ├── components/
+│   │   ├── layout/             # Global layout (Navbar, Footer)
+│   │   ├── project-detail/     # Project detail overlay and section layouts
+│   │   ├── sections/           # Page sections (Hero, Quote, About, Projects, Experience)
+│   │   └── ui/                 # Reusable micro-components (Cursor, Badges, Cards)
+│   ├── data/
+│   │   └── portfolio.ts        # ⭐ Main data file — edit this to customize the portfolio
+│   ├── hooks/                  # Custom React hooks (usePortfolio)
+│   ├── locales/                # i18n translation files (es.json, en.json)
+│   ├── services/               # Service layer for data fetching
+│   ├── App.tsx                 # Main application component
+│   ├── index.css               # Global styles and Tailwind v4 config
+│   └── main.tsx                # React entry point
 ```
 
 ---
@@ -70,36 +74,13 @@ Ensure you have **Node.js** (version 18+ recommended) and **npm** installed.
 
 ### Build and Deployment
 
-To generate a optimized production build in the `dist` folder:
+Generate an optimized production build in the `dist/` folder:
 ```bash
 npm run build
 ```
 
-To preview the production build locally:
+Preview the production build locally:
 ```bash
 npm run preview
 ```
 
----
-
-## 📝 Customizing Portfolio Data
-
-All the copy, projects, experiences, and social links are centralized in a single configuration file. To update the content of the portfolio, modify the object inside:
-
-📍 `src/data/portfolio.ts`
-
-```typescript
-export const portfolioData: PortfolioData = {
-  personalInfo: {
-    name: "Espe Moragues",
-    subheadline: "Creative Art Director based in Valencia...",
-    // ...
-  },
-  projects: [
-    // Add or modify projects here
-  ],
-  experiences: [
-    // Add or modify career experiences here
-  ]
-};
-```

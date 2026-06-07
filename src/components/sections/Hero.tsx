@@ -5,9 +5,10 @@ import { AnimatedSection } from "../ui/AnimatedSection";
 interface HeroProps {
   name: string;
   subheadline: string;
+  badgeText?: string;
 }
 
-export function Hero({ name, subheadline }: HeroProps) {
+export function Hero({ name, subheadline, badgeText }: HeroProps) {
   const handleBadgeClick = () => {
     const target = document.querySelector("#contacto");
     if (target) {
@@ -36,6 +37,7 @@ export function Hero({ name, subheadline }: HeroProps) {
         style={{ transitionDelay: "300ms" }}
       >
         <RotatingBadge
+          text={badgeText}
           centerContent={
             <span className="font-sans font-extrabold text-surface-container-lowest text-2xl md:text-3xl select-none leading-none flex items-center justify-center w-full h-full -translate-y-[2px]">
               ;)

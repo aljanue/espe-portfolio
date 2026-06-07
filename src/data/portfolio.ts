@@ -39,27 +39,36 @@ export interface Experience {
   role: string;
   period: string;
   description: string;
-  logoText: string;
+  logoText?: string; // Opcional — texto tipográfico del logo de la empresa
 }
 
 export interface PortfolioData {
   personalInfo: {
-    name: string;
-    headline: string;
-    subheadline: string;
-    bioParagraphs: string[];
-    email: string;
-    phone: string;
-    location: string;
-    avatarUrl: string;
+    name: string;              // REQUERIDO — nombre de la persona
+    headline?: string;         // Opcional — no se usa en UI actualmente
+    subheadline?: string;      // Opcional — subtítulo en la sección Hero
+    bioParagraphs?: string[];  // Opcional — si está vacío/ausente se oculta la sección About
+    email?: string;            // Opcional — email en el Footer
+    phone?: string;            // Opcional — teléfono en el Footer
+    location?: string;         // Opcional — no se usa en UI actualmente
+    avatarUrl?: string;        // Opcional — foto en About; si falta se oculta el bloque de imagen
+    jobTitle?: string;         // Opcional — título profesional en Navbar y copyright del Footer
+    badgeText?: string;        // Opcional — texto del badge circular giratorio en Hero y Footer
+    copyrightName?: string;    // Opcional — nombre en el pie de copyright; si falta usa `name`
+    useEnglish?: boolean;      // Opcional — determina si se muestra o no el selector de idiomas
   };
-  projects: Project[];
-  experiences: Experience[];
-  socials: {
+  quote?: {                    // Opcional — cita inspiracional entre Hero y About
+    text: string;              // REQUERIDO si se define quote — texto de la cita
+    author?: string;           // Opcional — autor de la cita
+  };
+  projects?: Project[];        // Opcional — lista de proyectos
+  experiences?: Experience[];  // Opcional — lista de experiencias
+  socials?: {                  // Opcional — enlaces en el Footer
     label: string;
     url: string;
   }[];
 }
+
 
 export const portfolioData: Record<'es' | 'en', PortfolioData> = {
   es: {
@@ -67,6 +76,9 @@ export const portfolioData: Record<'es' | 'en', PortfolioData> = {
       name: "Espe Moragues",
       headline: "Espe Moragues",
       subheadline: "Creative Art Director based in Valencia. Crafting visual narratives with a copywriter's soul.",
+      jobTitle: "Creative Art Director",
+      badgeText: "Una Arte con mucho espíritu de Copy • ",
+      copyrightName: "Espe Moragues",
       avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&h=500&q=80",
       bioParagraphs: [
         "Graduada en el doble grado de Publicidad, RRPP + Marketing en la Universidad CEU Cardenal Herrera de València. Apasionada del Marketing y la Creatividad Publicitaria con gran interés en la dirección de arte y el diseño.",
@@ -77,6 +89,11 @@ export const portfolioData: Record<'es' | 'en', PortfolioData> = {
       phone: "652 984 348",
       location: "Valencia, España"
     },
+    quote: {
+      text: "\u201cNo es s\u00f3lo lo que dices lo que mueve a la gente. Es la manera en la que lo dices\u201d",
+      author: "Mar\u00e7al Moli\u00e9"
+    },
+
     projects: [
       {
         id: "consum-mascotas",
@@ -246,6 +263,9 @@ export const portfolioData: Record<'es' | 'en', PortfolioData> = {
       name: "Espe Moragues",
       headline: "Espe Moragues",
       subheadline: "Creative Art Director based in Valencia. Crafting visual narratives with a copywriter's soul.",
+      jobTitle: "Creative Art Director",
+      badgeText: "An Art with a Copywriter's Soul • ",
+      copyrightName: "Espe Moragues",
       avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&h=500&q=80",
       bioParagraphs: [
         "Double Degree in Advertising, PR + Marketing at Universidad CEU Cardenal Herrera in Valencia. Passionate about Marketing and Advertising Creativity with a strong interest in art direction and design.",
@@ -256,7 +276,12 @@ export const portfolioData: Record<'es' | 'en', PortfolioData> = {
       phone: "652 984 348",
       location: "Valencia, Spain"
     },
+    quote: {
+      text: "\u201cIt\u2019s not only what you say that moves people. It\u2019s the way you say it.\u201d",
+      author: "Mar\u00e7al Moli\u00e9"
+    },
     projects: [
+
       {
         id: "consum-mascotas",
         title: "Consum Pets",

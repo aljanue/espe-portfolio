@@ -7,6 +7,9 @@ interface ExperienceCardProps {
 }
 
 export function ExperienceCard({ exp, isLast = false }: ExperienceCardProps) {
+  // Fallback seguro: evita que las comparaciones de estilo fallen con undefined
+  const logo = exp.logoText ?? '';
+
   return (
     <AnimatedSection
       tag="div"
@@ -17,14 +20,14 @@ export function ExperienceCard({ exp, isLast = false }: ExperienceCardProps) {
       {/* Brand typographic logo */}
       <div
         className={`font-bold tracking-tighter text-on-surface-variant/40 leading-none w-full md:w-1/3 select-none ${
-          exp.logoText === "kids."
+          logo === "kids."
             ? "text-[60px] md:text-[80px] italic"
-            : exp.logoText === "&"
+            : logo === "&"
             ? "text-[80px] md:text-[100px]"
             : "font-light tracking-[0.1em] text-lg md:text-xl uppercase"
         }`}
       >
-        {exp.logoText}
+        {logo || '—'}
       </div>
 
       {/* Role and description */}

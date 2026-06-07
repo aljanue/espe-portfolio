@@ -4,9 +4,11 @@ import { LanguageSwitcher } from "../ui/LanguageSwitcher";
 
 interface NavbarProps {
   name: string;
+  jobTitle?: string;
+  useEnglish?: boolean;
 }
 
-export function Navbar({ name }: NavbarProps) {
+export function Navbar({ name, jobTitle, useEnglish = false }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const { t } = useTranslation();
 
@@ -66,10 +68,12 @@ export function Navbar({ name }: NavbarProps) {
         </a>
       </div>
       <div className="flex items-center gap-6">
-        <div className="hidden sm:block text-on-surface-variant font-label-caps text-xs md:text-label-caps opacity-50 select-none">
-          Creative Art Director
-        </div>
-        <LanguageSwitcher />
+        {jobTitle && (
+          <div className="hidden sm:block text-on-surface-variant font-label-caps text-xs md:text-label-caps opacity-50 select-none">
+            {jobTitle}
+          </div>
+        )}
+        {useEnglish && <LanguageSwitcher />}
       </div>
     </nav>
   );

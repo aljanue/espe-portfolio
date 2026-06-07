@@ -3,9 +3,9 @@ import { RotatingBadge } from "../ui/RotatingBadge";
 import { useTranslation } from "react-i18next";
 
 interface FooterProps {
-  email: string;
-  phone: string;
-  socials: { label: string; url: string }[];
+  email?: string;
+  phone?: string;
+  socials?: { label: string; url: string }[];
 }
 
 export function Footer({ email, phone, socials }: FooterProps) {
@@ -23,32 +23,38 @@ export function Footer({ email, phone, socials }: FooterProps) {
       <AnimatedSection tag="div" className="z-10 flex flex-col gap-12 max-w-2xl">
         <h2 className="font-display-xl text-5xl md:text-display-xl tracking-tight">{t('footer.title')}</h2>
         <div className="flex flex-col gap-4">
-          <a 
-            className="font-headline-md text-xl md:text-headline-md hover:text-primary transition-colors interactive-element" 
-            href={`mailto:${email}`}
-          >
-            {email}
-          </a>
-          <a 
-            className="font-headline-md text-xl md:text-headline-md hover:text-primary transition-colors interactive-element" 
-            href={`tel:${phone.replace(/\s+/g, "")}`}
-          >
-            {phone}
-          </a>
-        </div>
-        <div className="flex gap-8 mt-4">
-          {socials.map((social, index) => (
+          {email && (
             <a 
-              key={index}
-              className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors interactive-element" 
-              href={social.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              className="font-headline-md text-xl md:text-headline-md hover:text-primary transition-colors interactive-element" 
+              href={`mailto:${email}`}
             >
-              {social.label}
+              {email}
             </a>
-          ))}
+          )}
+          {phone && (
+            <a 
+              className="font-headline-md text-xl md:text-headline-md hover:text-primary transition-colors interactive-element" 
+              href={`tel:${phone.replace(/\s+/g, "")}`}
+            >
+              {phone}
+            </a>
+          )}
         </div>
+        {(socials ?? []).length > 0 && (
+          <div className="flex gap-8 mt-4">
+            {(socials ?? []).map((social, index) => (
+              <a 
+                key={index}
+                className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors interactive-element" 
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {social.label}
+              </a>
+            ))}
+          </div>
+        )}
       </AnimatedSection>
       
       <AnimatedSection 

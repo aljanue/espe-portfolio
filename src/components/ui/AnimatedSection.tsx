@@ -7,6 +7,7 @@ interface AnimatedSectionProps {
   id?: string;
   tag?: "section" | "div" | "article" | "nav" | "footer" | "header" | "blockquote";
   style?: CSSProperties;
+  onClick?: () => void;
 }
 
 export function AnimatedSection({
@@ -15,12 +16,13 @@ export function AnimatedSection({
   id,
   tag = "section",
   style,
+  onClick,
 }: AnimatedSectionProps) {
   const ref = useIntersectionObserver();
   const Tag = tag as any;
 
   return (
-    <Tag ref={ref} id={id} className={`reveal ${className}`} style={style}>
+    <Tag ref={ref} id={id} className={`reveal ${className}`} style={style} onClick={onClick}>
       {children}
     </Tag>
   );

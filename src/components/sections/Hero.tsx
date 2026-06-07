@@ -22,7 +22,7 @@ export function Hero({ name, subheadline }: HeroProps) {
 
       <AnimatedSection tag="div" className="z-10 w-full flex flex-col md:items-end md:text-right sm:mt-auto mt-20">
         <h1 className="font-display-xl text-5xl md:text-display-xl tracking-tighter leading-none mb-4 md:mb-0">
-          {name}<span className="text-gradient ml-1 inline-block font-sans origin-left">®</span>
+          {name}
         </h1>
         <p className="font-headline-md text-2xl md:text-headline-md mt-6 text-on-surface-variant max-w-3xl md:ml-auto leading-tight">
           {subheadline}
@@ -35,7 +35,14 @@ export function Hero({ name, subheadline }: HeroProps) {
         className="absolute bottom-12 left-6 md:left-auto md:right-edge-margin-desktop md:top-1/4 md:bottom-auto z-20" 
         style={{ transitionDelay: "300ms" }}
       >
-        <RotatingBadge onClick={handleBadgeClick} />
+        <RotatingBadge
+          centerContent={
+            <span className="font-sans font-extrabold text-surface-container-lowest text-2xl md:text-3xl select-none leading-none flex items-center justify-center w-full h-full -translate-y-[2px]">
+              ;)
+            </span>
+          }
+          onClick={handleBadgeClick}
+        />
       </AnimatedSection>
     </header>
   );

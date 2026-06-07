@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { usePortfolio } from "./hooks/usePortfolio";
+import type { Project } from "./data/portfolio";
 import { CustomCursor } from "./components/ui/CustomCursor";
 import { Navbar } from "./components/layout/Navbar";
 import { Hero } from "./components/sections/Hero";
@@ -8,9 +10,11 @@ import { Projects } from "./components/sections/Projects";
 import { Experience } from "./components/sections/Experience";
 import { Footer } from "./components/layout/Footer";
 import { BackgroundAsterisk } from "./components/ui/BackgroundAsterisk";
+import { ProjectDetail } from "./components/project-detail/ProjectDetail";
 
 export default function App() {
   const { data, isLoading, error } = usePortfolio();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   if (isLoading) {
     return (
@@ -63,7 +67,7 @@ export default function App() {
           avatarUrl={personalInfo.avatarUrl} 
           bioParagraphs={personalInfo.bioParagraphs} 
         />
-        <Projects projects={projects} />
+        <Projects projects={projects} onProjectSelect={setSelectedProject} />
         <Experience experiences={experiences} />
       </main>
 
@@ -73,6 +77,14 @@ export default function App() {
         phone={personalInfo.phone} 
         socials={socials} 
       />
+
+      {/* Project Detail Overlay */}
+      {selectedProject && (
+        <ProjectDetail 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      )}
     </>
   );
 }

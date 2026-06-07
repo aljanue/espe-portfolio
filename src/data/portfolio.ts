@@ -1,9 +1,36 @@
+export type ProjectSectionType = 
+  | 'brand-intro'
+  | 'hero-fullbleed'
+  | 'media-showcase'
+  | 'split-content';
+
+export interface ProjectSection {
+  type: ProjectSectionType;
+  headline?: string;
+  description?: string;
+  logoText?: string;
+  backgroundImageUrl?: string;
+  overlayText?: string;
+  mediaItems?: {
+    imageUrl: string;
+    caption?: string;
+    type?: 'photo' | 'phone-mockup' | 'billboard';
+  }[];
+  imageUrl?: string;
+  imagePosition?: 'left' | 'right';
+}
+
 export interface Project {
   id: string;
   title: string;
   category: string;
   description: string;
   imageUrl: string;
+  accentColor?: string;
+  year?: string;
+  client?: string;
+  role?: string;
+  sections?: ProjectSection[];
 }
 
 export interface Experience {
@@ -39,7 +66,7 @@ export const portfolioData: PortfolioData = {
     name: "Espe Moragues",
     headline: "Espe Moragues",
     subheadline: "Creative Art Director based in Valencia. Crafting visual narratives with a copywriter's soul.",
-    avatarUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuDsb4T9fFZ0Uo2az_2y4XJD7O-P4rxepm-FgnfVYfwTHxo7DN7MP97X9yI5EMMRSiuhlTN40HWUe2K7jvJiiBxxRn_8xfrvtdPDE_bt5xcGmjjpwq6msPgzYRoUuUkUfJjsLi92KExqiUcAKPRaos_rIUjw99mJpPqT10IbW6z4-BQBInTJPqC-ybTADQ8IDNoaaH2xfke23L9W4c6A-RnbTtzxFQtOIYoS-oVZQhDNrwo2cs-TVTZsNLa3udF5_6DKk4VAYrdssZxo",
+    avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&h=500&q=80",
     bioParagraphs: [
       "Graduada en el doble grado de Publicidad, RRPP + Marketing en la Universidad CEU Cardenal Herrera de València. Apasionada del Marketing y la Creatividad Publicitaria con gran interés en la dirección de arte y el diseño.",
       "Mi especialidad es tanto idear conceptos, como traducirlos de forma visual a publicidad coherente con el tono y objetivo de las marcas.",
@@ -55,42 +82,130 @@ export const portfolioData: PortfolioData = {
       title: "Consum Mascotas",
       category: "Art Direction / Campaign",
       description: "Creatividad integral y dirección de arte para la campaña de fidelización de mascotas de Consum.",
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAwuQMb71md0z-NhrTciG2U5P2y7_XT3WXAak80aDeZ5oyInfCOY_dm6t47JMJcua8T3wPGoRCde98B1SPTC8V3UYdQzodYy0Q2IpK9TDGOXyhMIyZsJos6_IQwDsWZ1ZyKVklX1fMPdgSThLz6U4qcc1CKI21pH3wXQF6ZbKgWLCc62Kbrm1Df_6E7CwvhpwFyiQmsU74hoDK_VY_RPGIQj_YDdHa9fT4-nebyfFQOrW4lIXRQPBhWzIU3Qne8AYYtRfHEp-d6dtMU"
+      imageUrl: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",
+      accentColor: "#E85C2B", // Naranja Consum
+      year: "2024",
+      client: "Consum",
+      role: "Dirección de Arte",
+      sections: [
+        {
+          type: "brand-intro",
+          logoText: "consum",
+          description: "La cooperativa Consum lanza una campaña enfocada en las mascotas, destacando la importancia de los animales en la familia y premiando a sus clientes más fieles."
+        },
+        {
+          type: "hero-fullbleed",
+          backgroundImageUrl: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1600&q=80",
+          overlayText: "FELIZ DÍA DE LA MASCOTA"
+        },
+        {
+          type: "media-showcase",
+          headline: "Campaña digital y física",
+          description: "Desarrollo de piezas para redes sociales (Reels, TikTok) y material POP en supermercados, manteniendo un tono cercano y emotivo.",
+          mediaItems: [
+            { imageUrl: "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=600&q=80", type: "phone-mockup" },
+            { imageUrl: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=600&q=80", type: "photo" }
+          ]
+        }
+      ]
     },
     {
       id: "essential-comp",
       title: "Essential Comp.",
       category: "Visual Branding / Experimental",
       description: "Exploración visual y branding experimental para Essential Compositions.",
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAzzx6ziIcmOuebqLvhBwJZotoXXitGpfExy4lphh9CjtjJ48IbJw19QgwsKTtKrreW26KH1m3p9AdTEVlGx2XgEz_ahevxamiKqQMY3ge831fGCbgDDQ69Y7CPIT5XxCtYvhF-F8VrCnmpe8mWy0f7_rfuL36NH0ozw9OzG54L4qIeoX0Kx9N9kiV7fv23bHaU_I-237UnMXcxyJ4z9qN0NtKkfNEybPvNRlfJkJ2xPnzkEGEu4XX5umMZQFr3sWbz92R16oNyoypP"
+      imageUrl: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+      accentColor: "#EBB1B9", // Rosa palo
+      year: "2025",
+      client: "The Essence Design Company",
+      role: "Branding & Visual",
+      sections: [
+        {
+          type: "brand-intro",
+          logoText: "essential",
+          description: "Essential Compositions es un laboratorio creativo que busca extraer la esencia de las cosas cotidianas a través del diseño minimalista y sensorial."
+        },
+        {
+          type: "split-content",
+          headline: "Eau de Parkinson",
+          description: "Un proyecto conceptual que explora la relación entre el olfato y las memorias, utilizando fragancias como vehículo de concienciación.",
+          imageUrl: "https://images.unsplash.com/photo-1595532545831-5231c5b88237?auto=format&fit=crop&w=800&q=80",
+          imagePosition: "left"
+        },
+        {
+          type: "media-showcase",
+          headline: "Packaging Design",
+          mediaItems: [
+            { imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80", type: "photo" },
+            { imageUrl: "https://images.unsplash.com/photo-1587448834465-b51676de20ae?auto=format&fit=crop&w=800&q=80", type: "photo" }
+          ]
+        }
+      ]
     },
     {
       id: "ivi-35-aniversario",
       title: "IVI 35 Aniversario",
       category: "Event Identity / Strategy",
       description: "Identidad de evento y estrategia de comunicación para el 35 aniversario de IVI.",
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCWwtWB8d8xcvOwp8jRko9rD5z_rE91896os3H3DgwTlCQofQYCyzraV1Mk6Gb-hS0uMEqaDCCN0ZFEldNzh26ef7m6vdbKTX5SRjzO22zqiWgf-tRgNjsfEVmcj_5MrGcD_gHszNAnteLxFeUr8SmoA98vOGLpUlpmv6iVPfAFWI5LLZt_vR4nax7jEpoIW8FWK7d1Dlvm-X4mxyOacLiFHZj-YSOU48BT7qprTblFY6Cfe4MfSLPgKwzE9oAq-JRRAYUOpFzzgusH"
+      imageUrl: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80",
+      accentColor: "#115B9D", // Azul IVI
+      year: "2024",
+      client: "IVI",
+      role: "Dirección de Arte & Estrategia",
+      sections: [
+        {
+          type: "brand-intro",
+          logoText: "IVI)",
+          description: "La red de clínicas de reproducción asistida líder mundial cumple 35 años. Una campaña para celebrar los 'Greatest Hits' de la marca: los nacimientos."
+        },
+        {
+          type: "hero-fullbleed",
+          backgroundImageUrl: "https://images.unsplash.com/photo-1520694086658-005187e1f440?auto=format&fit=crop&w=1600&q=80",
+          overlayText: "GREATEST HITS"
+        },
+        {
+          type: "media-showcase",
+          headline: "Campaña Gráfica",
+          description: "Despliegue de campaña en exteriores y medios digitales mostrando a los protagonistas reales del éxito de IVI.",
+          mediaItems: [
+            { imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=600&q=80", type: "billboard" },
+            { imageUrl: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=600&q=80", type: "photo" }
+          ]
+        }
+      ]
     },
     {
       id: "axn-accionistas",
       title: "AXN Accionistas",
       category: "B2B Design / Reports",
       description: "Diseño de reportes y materiales B2B para la junta de accionistas de AXN.",
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAQcVs48b7ZzrlYBUoFBReyE88PhhDSyVL2LwWJTRcyvkkEesv0C_qNT3yJN7IO2jawymk21TEo2sDBUw5EFDGGUBNKijibNyULV8LvdyN8ilGo2tIO8MW731cBQWGiPUZd3TW8Fz-N1UjBbPifFI74KFbPupWPzmt9ERZp2dqh5iF98d1FQVzOuOo5ASoA2B0o4bP0tbT7j50hnHkj-uEWLAC2OWS7QmLnl3oaYiu2vUG-MhYaSP9PBcx5Q87oe2pYdN9IrOvZhQjy"
+      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+      accentColor: "#CC0000", // Rojo AXN
+      year: "2023",
+      client: "AXN",
+      role: "Diseño Editorial B2B"
     },
     {
       id: "snatts-piti-pausa",
       title: "Snatt's Piti-pausa",
       category: "Social Content / Creative",
       description: "Contenido creativo y social media para la campaña Piti-pausa de Snatt's.",
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBLmbUxrk7eFqxbcsVPgY-nQ2Z5tU7irf0wOUZ3GzA13W_5-Nt4xTxZYRIOicRgXpDSdI75VIt1b3EDGFgt1ZUr_YBlfJ89cVGgup2Ss6S2sU15pXjgWE8BN9A9WnTMDflo_1ufJlELhDMIJJJoKQZW5rD4XiEsPdTlshL2RvHaWKb9_j5WMAf5JJmg9K8_MTT1brbpQjkGPK4o2wXyo3DUAVN6nWiJcavph2oV63VxKTllS4wqY4xWCEHqZUzFtkiTxwg5fRNx4J1T"
+      imageUrl: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=800&q=80",
+      accentColor: "#F4D03F", // Amarillo Snatts
+      year: "2024",
+      client: "Snatt's (Grefusa)",
+      role: "Creatividad Digital"
     },
     {
       id: "porcelanosa",
       title: "Porcelanosa",
       category: "Branded Content / Luxury",
       description: "Branded content de lujo y materiales digitales para Porcelanosa.",
-      imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBZy4Hv0GQWEpV7BEiU0tpEmNbm6XvvO_irmbukctvJT3vMBksFruSXGAZ2iLzmF37vKG2tPWHxjqmRU0VmhWwiHvtdBKqshI2qWw90n74hWIYTQ5jc-vb_bUqOf7ogRAGn-uzwSYno79cTdA0ZULgPVIKTQ2hws3RTfk4WqrGRZQnL5nO0ofo-0vhfSo24_k-yz96pKM3jeysj6aNh35qTsvOHDQfzJkfM6Bljf-I8BVPKQ04gHxK529jl-NQ9eEz9rM8oM992NhKC"
+      imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      accentColor: "#1A1A1A", // Negro Porcelanosa
+      year: "2024",
+      client: "Porcelanosa",
+      role: "Branded Content"
     }
   ],
   experiences: [

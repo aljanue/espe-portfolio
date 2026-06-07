@@ -1,5 +1,5 @@
 import { AnimatedSection } from "../ui/AnimatedSection";
-import { AsteriskIcon } from "../ui/AsteriskIcon";
+import { RotatingBadge } from "../ui/RotatingBadge";
 
 interface FooterProps {
   email: string;
@@ -8,6 +8,10 @@ interface FooterProps {
 }
 
 export function Footer({ email, phone, socials }: FooterProps) {
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer 
       className="w-full flex flex-col md:flex-row justify-between items-center px-4 md:px-edge-margin-desktop py-section-padding border-t border-outline-variant bg-surface overflow-hidden relative" 
@@ -46,12 +50,14 @@ export function Footer({ email, phone, socials }: FooterProps) {
       
       <AnimatedSection 
         tag="div" 
-        className="z-10 mt-24 md:mt-0 flex flex-col items-center md:items-end gap-12" 
+        className="z-10 mt-24 md:mt-0 flex flex-col items-center md:items-end gap-12 h-full justify-between" 
         style={{ transitionDelay: "200ms" }}
       >
-        <div className="relative w-32 h-32 animate-rotate-very-slow footer-asterisk cursor-pointer">
-          <AsteriskIcon className="w-full h-full text-gradient" />
-        </div>
+        <RotatingBadge
+          text=""
+          className="relative w-32 h-32 animate-rotate-very-slow footer-asterisk cursor-pointer"
+          onClick={handleScrollToTop}
+        />
         <p className="font-body-md text-body-md text-on-surface-variant opacity-50">
           © {new Date().getFullYear()} Espe Moragues — Creative Art Director
         </p>

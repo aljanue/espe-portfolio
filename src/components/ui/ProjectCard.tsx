@@ -4,11 +4,16 @@ import { AnimatedSection } from "./AnimatedSection";
 
 interface ProjectCardProps {
   project: Project;
+  onClick?: (project: Project) => void;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, onClick }: ProjectCardProps) {
   return (
-    <AnimatedSection tag="div" className="group stagger-item select-none cursor-pointer">
+    <AnimatedSection 
+      tag="div" 
+      className="group stagger-item select-none cursor-pointer"
+      onClick={() => onClick?.(project)}
+    >
       {/* Image container */}
       <div className="overflow-hidden mb-6 aspect-[4/5] relative">
         <img

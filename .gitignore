@@ -26,6 +26,3 @@ dist-ssr
 
 # Vite
 *.tsbuildinfo
-
-# Gemini Ide
-.gemini-temp-pdf/

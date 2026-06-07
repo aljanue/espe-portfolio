@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { usePortfolio } from "./hooks/usePortfolio";
 import type { Project } from "./data/portfolio";
 import { CustomCursor } from "./components/ui/CustomCursor";
@@ -11,8 +12,10 @@ import { Experience } from "./components/sections/Experience";
 import { Footer } from "./components/layout/Footer";
 import { BackgroundAsterisk } from "./components/ui/BackgroundAsterisk";
 import { ProjectDetail } from "./components/project-detail/ProjectDetail";
+import { LanguageSwitcher } from "./components/ui/LanguageSwitcher";
 
 export default function App() {
+  const { t } = useTranslation();
   const { data, isLoading, error } = usePortfolio();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -23,7 +26,7 @@ export default function App() {
           <BackgroundAsterisk className="w-full h-full" />
         </div>
         <p className="font-label-caps text-label-caps text-on-surface-variant animate-pulse">
-          Cargando Portfolio...
+          {t('app.loading')}
         </p>
       </div>
     );
@@ -32,15 +35,15 @@ export default function App() {
   if (error || !data) {
     return (
       <div className="min-h-screen bg-[#131313] flex flex-col items-center justify-center gap-4 text-center px-4 select-none">
-        <h2 className="font-headline-md text-red-400">Error al cargar el contenido</h2>
+        <h2 className="font-headline-md text-red-400">{t('app.errorTitle')}</h2>
         <p className="font-body-md text-on-surface-variant max-w-md">
-          {error?.message || "No se ha podido conectar con el servicio de datos."}
+          {error?.message || t('app.errorMessage')}
         </p>
         <button 
           onClick={() => window.location.reload()}
           className="mt-6 px-6 py-3 bg-white text-black font-label-caps text-label-caps hover:bg-gradient-asterisk hover:text-white transition-all duration-300 rounded-none interactive-element"
         >
-          Reintentar
+          {t('actions.retry')}
         </button>
       </div>
     );

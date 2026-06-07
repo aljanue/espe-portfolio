@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "../ui/LanguageSwitcher";
 
 interface NavbarProps {
   name: string;
@@ -6,6 +8,7 @@ interface NavbarProps {
 
 export function Navbar({ name }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,32 +41,35 @@ export function Navbar({ name }: NavbarProps) {
           href="#proyectos"
           onClick={(e) => handleLinkClick(e, "#proyectos")}
         >
-          Proyectos
+          {t('nav.projects')}
         </a>
         <a
           className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300 interactive-element"
           href="#sobre-mi"
           onClick={(e) => handleLinkClick(e, "#sobre-mi")}
         >
-          Sobre Mí
+          {t('nav.about')}
         </a>
         <a
           className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300 interactive-element"
           href="#experiencia"
           onClick={(e) => handleLinkClick(e, "#experiencia")}
         >
-          Experiencia
+          {t('nav.experience')}
         </a>
         <a
           className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300 interactive-element"
           href="#contacto"
           onClick={(e) => handleLinkClick(e, "#contacto")}
         >
-          Contacto
+          {t('nav.contact')}
         </a>
       </div>
-      <div className="text-on-surface-variant font-label-caps text-xs md:text-label-caps opacity-50 select-none">
-        Creative Art Director
+      <div className="flex items-center gap-6">
+        <div className="hidden sm:block text-on-surface-variant font-label-caps text-xs md:text-label-caps opacity-50 select-none">
+          Creative Art Director
+        </div>
+        <LanguageSwitcher />
       </div>
     </nav>
   );

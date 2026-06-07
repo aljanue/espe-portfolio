@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "actions": {
+    "contact": "Hablemos",
+    "viewProject": "Ver Proyecto",
+    "back": "Volver",
+    "visitSite": "Visitar sitio web",
+    "retry": "Reintentar"
+  },
+  "footer": {
+    "title": "Hablemos.",
+    "rights": "Todos los derechos reservados."
+  },
+  "sections": {
+    "projects": {
+      "title": "Proyectos",
+      "subtitle": "Seleccionados (2024-2025)"
+    },
+    "experience": {
+      "title": "Experiencia",
+      "subtitle": "(+Destacada)"
+    },
+    "about": {
+      "title": "Sobre mí"
+    }
+  },
+  "app": {
+    "loading": "Cargando Portfolio...",
+    "errorTitle": "Error al cargar el contenido",
+    "errorMessage": "No se ha podido conectar con el servicio de datos."
+  }
+}

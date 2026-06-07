@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "actions": {
+    "contact": "Let's Talk",
+    "viewProject": "View Project",
+    "back": "Go Back",
+    "visitSite": "Visit website",
+    "retry": "Retry"
+  },
+  "footer": {
+    "title": "Let's talk.",
+    "rights": "All rights reserved."
+  },
+  "sections": {
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Selected (2024-2025)"
+    },
+    "experience": {
+      "title": "Experience",
+      "subtitle": "(+Featured)"
+    },
+    "about": {
+      "title": "About me"
+    }
+  },
+  "app": {
+    "loading": "Loading Portfolio...",
+    "errorTitle": "Error loading content",
+    "errorMessage": "Could not connect to the data service."
+  }
+}

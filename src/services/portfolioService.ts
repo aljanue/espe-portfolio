@@ -12,25 +12,27 @@ export class PortfolioService {
    * Fetches the portfolio data from the API.
    * If no API URL is configured, falls back to local mockup data.
    */
-  public static async fetchPortfolioData(): Promise<PortfolioData> {
+  public static async fetchPortfolioData(locale: string = 'es'): Promise<PortfolioData> {
+    const lang = (locale === 'en' ? 'en' : 'es') as 'es' | 'en';
+    
     if (!this.API_URL) {
       // Simulate API network latency
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(mockData);
+          resolve(mockData[lang] || mockData.es);
         }, 300);
       });
     }
 
     try {
-      const response = await fetch(`${this.API_URL}/portfolio`);
+      const response = await fetch(`${this.API_URL}/portfolio?locale=${lang}`);
       if (!response.ok) {
         throw new Error(`Failed to fetch portfolio data: ${response.statusText}`);
       }
       return await response.json();
     } catch (error) {
       console.error("API Fetch failed, falling back to mock data:", error);
-      return mockData;
+      return mockData[lang] || mockData.es;
     }
   }
 }

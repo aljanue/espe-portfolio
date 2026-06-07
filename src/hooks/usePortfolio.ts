@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { PortfolioData } from "../data/portfolio";
 import { PortfolioService } from "../services/portfolioService";
 
 export function usePortfolio() {
+  const { i18n } = useTranslation();
   const [data, setData] = useState<PortfolioData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -13,7 +15,7 @@ export function usePortfolio() {
     async function loadData() {
       try {
         setIsLoading(true);
-        const result = await PortfolioService.fetchPortfolioData();
+        const result = await PortfolioService.fetchPortfolioData(i18n.language);
         if (isMounted) {
           setData(result);
           setError(null);
@@ -34,7 +36,7 @@ export function usePortfolio() {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [i18n.language]);
 
   return { data, isLoading, error };
 }

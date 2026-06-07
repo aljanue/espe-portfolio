@@ -1,5 +1,6 @@
 import { AnimatedSection } from "../ui/AnimatedSection";
 import { RotatingBadge } from "../ui/RotatingBadge";
+import { useTranslation } from "react-i18next";
 
 interface FooterProps {
   email: string;
@@ -8,6 +9,8 @@ interface FooterProps {
 }
 
 export function Footer({ email, phone, socials }: FooterProps) {
+  const { t } = useTranslation();
+  
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -18,7 +21,7 @@ export function Footer({ email, phone, socials }: FooterProps) {
       id="contacto"
     >
       <AnimatedSection tag="div" className="z-10 flex flex-col gap-12 max-w-2xl">
-        <h2 className="font-display-xl text-5xl md:text-display-xl tracking-tight">Hablemos.</h2>
+        <h2 className="font-display-xl text-5xl md:text-display-xl tracking-tight">{t('footer.title')}</h2>
         <div className="flex flex-col gap-4">
           <a 
             className="font-headline-md text-xl md:text-headline-md hover:text-primary transition-colors interactive-element" 

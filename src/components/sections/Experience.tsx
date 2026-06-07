@@ -1,20 +1,23 @@
 import type { Experience as ExpType } from "../../data/portfolio";
 import { ExperienceCard } from "../ui/ExperienceCard";
 import { AnimatedSection } from "../ui/AnimatedSection";
+import { useTranslation } from "react-i18next";
 
 interface ExperienceProps {
   experiences: ExpType[];
 }
 
 export function Experience({ experiences }: ExperienceProps) {
+  const { t } = useTranslation();
+
   return (
     <section className="px-4 md:px-edge-margin-desktop py-section-padding bg-surface-container overflow-hidden" id="experiencia">
       <div className="flex flex-col gap-16">
         <AnimatedSection tag="div" className="">
           <h2 className="font-display-xl text-5xl md:text-display-xl leading-none mb-4">
-            Experiencia
+            {t('sections.experience.title')}
           </h2>
-          <p className="font-label-caps text-label-caps text-primary">(+Destacada)</p>
+          <p className="font-label-caps text-label-caps text-primary">{t('sections.experience.subtitle')}</p>
         </AnimatedSection>
 
         <div 

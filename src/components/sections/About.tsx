@@ -1,4 +1,5 @@
 import { AnimatedSection } from "../ui/AnimatedSection";
+import { useTranslation } from "react-i18next";
 
 interface AboutProps {
   avatarUrl: string;
@@ -6,6 +7,8 @@ interface AboutProps {
 }
 
 export function About({ avatarUrl, bioParagraphs }: AboutProps) {
+  const { t } = useTranslation();
+
   return (
     <section 
       className="px-4 md:px-edge-margin-desktop py-section-padding grid grid-cols-1 md:grid-cols-12 gap-gutter items-center overflow-hidden" 
@@ -24,7 +27,7 @@ export function About({ avatarUrl, bioParagraphs }: AboutProps) {
       
       <AnimatedSection className="md:col-span-6 md:col-start-7 flex flex-col gap-8 mt-12 md:mt-0">
         <h2 className="font-display-xl text-5xl md:text-display-xl leading-none">
-          Sobre mí
+          {t('sections.about.title')}
         </h2>
         <div className="space-y-6 opacity-80 font-body-lg text-lg md:text-body-lg text-on-surface-variant">
           {bioParagraphs.map((para, index) => {

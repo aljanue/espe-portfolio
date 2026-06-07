@@ -8,7 +8,8 @@ export class ContentfulMapper {
     personalInfoRaw: any,
     quoteRaw: any,
     projectEntries: any[],
-    experienceEntries: any[]
+    experienceEntries: any[],
+    socialEntries: any[]
   ): PortfolioData {
     
     // Map Personal Info
@@ -20,7 +21,7 @@ export class ContentfulMapper {
       copyrightName: personalInfoRaw?.copyrightName || personalInfoRaw?.name || "",
       bioParagraphs: personalInfoRaw?.bioParagraphs || [],
       email: personalInfoRaw?.email || "",
-      phone: personalInfoRaw?.phone || "",
+      phone: personalInfoRaw?.phoneNumber ? String(personalInfoRaw.phoneNumber) : "",
       location: personalInfoRaw?.location || "",
       avatarUrl: personalInfoRaw?.avatarUrl?.fields?.file?.url 
         ? `https:${personalInfoRaw.avatarUrl.fields.file.url}` 
@@ -87,16 +88,18 @@ export class ContentfulMapper {
       };
     });
 
-    // Fixed Socials (or could be mapped if they create entries for them)
-    // As the Contentful schema provided has a "Social" type, let's just 
-    // keep the default fallback behavior for now since they are few, 
-    // or we could map them if we fetch them. 
-    // Assuming they didn't provide entries yet, we'll map statically.
-    const socials = [
-      { label: "Instagram", url: `https://instagram.com` },
-      { label: "LinkedIn", url: "https://linkedin.com" },
-      { label: "Email", url: `mailto:${personalInfo.email}` }
-    ];
+    const fetchedSocials = socialEntries.map((item) => ({
+      label: item.fields.label || "",
+      url: item.fields.url || ""
+    }));
+
+    const socials = [...fetchedSocials];
+    if (personalInfo.email && !socials.some(s => s.label.toLowerCase() === 'email' || s.url.includes('mailto:'))) {
+      socials.push({
+        label: "Email",
+        url: `mailto:${personalInfo.email}`
+      });
+    }
 
     return {
       personalInfo,

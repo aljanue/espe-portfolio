@@ -16,17 +16,18 @@ export class ContentfulService {
 
     const lang = locale === 'es' ? 'es' : 'en-US';
 
-    // Fetch all required entries in parallel
     const [
       personalInfoEntries, 
       quoteEntries, 
       projectEntries, 
-      experienceEntries
+      experienceEntries,
+      socialEntries
     ] = await Promise.all([
       contentfulClient.getEntries({ content_type: 'personalInfo', locale: lang, limit: 1 }),
       contentfulClient.getEntries({ content_type: 'quote', locale: lang, limit: 1 }),
       contentfulClient.getEntries({ content_type: 'project', locale: lang, include: 3 }),
-      contentfulClient.getEntries({ content_type: 'experience', locale: lang, order: ['-fields.order'] as any })
+      contentfulClient.getEntries({ content_type: 'experience', locale: lang, order: ['-fields.order'] as any }),
+      contentfulClient.getEntries({ content_type: 'social', locale: lang })
     ]);
 
     const personalInfoRaw = personalInfoEntries.items[0]?.fields || {};
@@ -36,7 +37,8 @@ export class ContentfulService {
       personalInfoRaw,
       quoteRaw,
       projectEntries.items,
-      experienceEntries.items
+      experienceEntries.items,
+      socialEntries.items
     );
   }
 }

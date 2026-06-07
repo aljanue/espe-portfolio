@@ -1,10 +1,28 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { HistoryService } from '../../services/historyService';
 
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
+  useEffect(() => {
+    if (!window.history.state || !window.history.state.lang) {
+      HistoryService.replaceState({ lang: i18n.language });
+    }
+
+    const handlePopState = (e: PopStateEvent) => {
+      if (e.state && e.state.lang && e.state.lang !== i18n.language) {
+        i18n.changeLanguage(e.state.lang);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [i18n]);
+
   const toggleLanguage = () => {
     const nextLang = i18n.language === 'es' ? 'en' : 'es';
+    HistoryService.pushState({ lang: nextLang });
     i18n.changeLanguage(nextLang);
   };
 

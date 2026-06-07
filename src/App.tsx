@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { usePortfolio } from "./hooks/usePortfolio";
 import type { Project } from "./data/portfolio";
@@ -12,12 +12,37 @@ import { Experience } from "./components/sections/Experience";
 import { Footer } from "./components/layout/Footer";
 import { BackgroundAsterisk } from "./components/ui/BackgroundAsterisk";
 import { ProjectDetail } from "./components/project-detail/ProjectDetail";
+import { HistoryService } from "./services/historyService";
 
 
 export default function App() {
   const { t } = useTranslation();
   const { data, isLoading, error } = usePortfolio();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      if (e.state && e.state.projectId && data) {
+        const p = data.projects?.find(proj => proj.id === e.state.projectId);
+        setSelectedProject(p || null);
+      } else {
+        setSelectedProject(null);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [data]);
+
+  const handleOpenProject = (project: Project) => {
+    HistoryService.pushState({ projectId: project.id });
+    setSelectedProject(project);
+  };
+
+  const handleCloseProject = () => {
+    if (!HistoryService.goBackIfStateExists('projectId')) {
+      setSelectedProject(null);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -83,7 +108,7 @@ export default function App() {
           avatarUrl={personalInfo.avatarUrl} 
           bioParagraphs={personalInfo.bioParagraphs} 
         />
-        <Projects projects={projects} onProjectSelect={setSelectedProject} />
+        <Projects projects={projects} onProjectSelect={handleOpenProject} />
         <Experience experiences={experiences} />
       </main>
 
@@ -98,7 +123,7 @@ export default function App() {
       {selectedProject && (
         <ProjectDetail 
           project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
+          onClose={handleCloseProject} 
         />
       )}
     </>

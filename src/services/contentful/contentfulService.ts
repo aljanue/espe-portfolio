@@ -14,7 +14,7 @@ export class ContentfulService {
       throw new Error("Contentful client is not configured.");
     }
 
-    const lang = locale === 'en' ? 'en-US' : 'es';
+    const lang = locale === 'es' ? 'es' : 'en-US';
 
     // Fetch all required entries in parallel
     const [
@@ -25,9 +25,8 @@ export class ContentfulService {
     ] = await Promise.all([
       contentfulClient.getEntries({ content_type: 'personalInfo', locale: lang, limit: 1 }),
       contentfulClient.getEntries({ content_type: 'quote', locale: lang, limit: 1 }),
-      // Include = 3 is used to resolve references up to 3 levels deep (project -> projectSection -> mediaItems)
       contentfulClient.getEntries({ content_type: 'project', locale: lang, include: 3 }),
-      contentfulClient.getEntries({ content_type: 'experience', locale: lang })
+      contentfulClient.getEntries({ content_type: 'experience', locale: lang, order: ['-fields.order'] as any })
     ]);
 
     const personalInfoRaw = personalInfoEntries.items[0]?.fields || {};
